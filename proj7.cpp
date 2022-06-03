@@ -149,14 +149,14 @@ main(int argc, char* argv[])
 				continue;
 
 			// Edit here
-			MPI_Send(&BigSignal[dst * PPSize], PPSize, MPI_FLOAT, dst, TAG_SCATTER, MPI_COMM_WORLD);
+			MPI_Send(&BigSignal[dst * PPSize], PPSize+MAXSHIFTS, MPI_FLOAT, dst, TAG_SCATTER, MPI_COMM_WORLD);
 		}
 	}
 	else
 	{
 		// edit here
 		// MPI_Recv(array, maxCanReceive, type, src, tag, MPI_COMM_WORLD, &status)
-		MPI_Recv(PPSignal, PPSize, MPI_FLOAT, 1, TAG_SCATTER, MPI_COMM_WORLD, &status);
+		MPI_Recv(PPSignal, PPSize+MAXSHIFTS, MPI_FLOAT, BOSS, TAG_SCATTER, MPI_COMM_WORLD, &status);
 	}
 
 	// each processor does its own autocorrelation:
